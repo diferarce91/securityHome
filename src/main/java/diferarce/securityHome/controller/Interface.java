@@ -30,7 +30,14 @@ public class Interface {
 		}		
 		
 		return "Bien";
-	} 
+	}
+	
+	@RequestMapping("/init")
+	@ResponseBody
+	public String init(){
+		
+		return "INIT";
+	}
 		
 }
 

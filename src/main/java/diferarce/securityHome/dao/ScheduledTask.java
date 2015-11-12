@@ -1,33 +1,33 @@
+
 package diferarce.securityHome.dao;
 
+import java.util.Date;
 import java.util.List;
 
-public class A {
-	
-	/*Clase de prueba ejemplo*/
+public class ScheduledTask {
 	
 	private int id;
 	private String name;
-	private List<B> deviceId;
+	private List<Device> devices;
 	
 	
 	
-	public A() {
+	public ScheduledTask() {
 		
 	}
 
 	
 
-	public A(int id, String name, List<B> deviceId) {
+	public ScheduledTask(int id, String name, List<Device> devices) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.deviceId = deviceId;
+		this.devices = devices;
 	}
 
 
 
-	public A(int id, String name) {
+	public ScheduledTask(int id, String name) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -56,22 +56,15 @@ public class A {
 
 
 
-	public List<B> getDeviceId() {
-		return deviceId;
+	public List<Device> getdevices() {
+		return devices;
 	}
 
 
 
-	public void setDeviceId(List<B> deviceId) {
-		this.deviceId = deviceId;
+	public void setdevices(List<Device> devices) {
+		this.devices = devices;
 	}
-
 	
 
-
-	
-	
-	
-	
-	
 }

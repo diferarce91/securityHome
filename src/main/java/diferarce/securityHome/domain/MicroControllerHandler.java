@@ -12,9 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
-import diferarce.securityHome.dao.A;
-import diferarce.securityHome.dao.B;
+import diferarce.securityHome.dao.Device;
 import diferarce.securityHome.dao.MicroController;
+import diferarce.securityHome.dao.ScheduledTask;
 
 
 @Component
@@ -29,44 +29,27 @@ public class MicroControllerHandler {
 	@Autowired
 	public MicroControllerHandler(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
-		this.addMicro();
-		//this.connect();
+		this.connectMc();
 	}
 
 
-	private void addMicro(){
+	private void connectMc(){
 		
-		//List<MicroController> list = null;
-		List<A> lista= null;
-		lista= this.sqlSession.selectList("ejemplo");
-		System.out.println(lista.size()+" :  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><");
-		for (A a : lista) {			
-			//System.out.println("  Array devicessss  :  "+a.getdevices().size());
-			for (B b : a.getDeviceId()) {
-				System.out.println(" NOMBRE :"+b.getname()+"   |  "+b.getDescription());
-			}
-		}	
-		
-		//list = this.sqlSession.selectList("getMicroControllers");
-		/*for (MicroController mc : list) {
-			mcs.put("device1",new MicroController(mc.getName(),mc.getPort()));
-		}*/
-
+		List<MicroController> list = null;
+		list = this.sqlSession.selectList("getMicroControllers");
+		for (MicroController mc : list) {
+			
+			List<Object> dataConnection =mc.connect();
+			SerialPort serialPort = (SerialPort) dataConnection.get(0);
+			mc.setSerialPort(serialPort);
+			
+			mcs.put((String)dataConnection.get(1),new MicroController(mc.getName(),mc.getPort()));
+			
+			this.initLister(mc);
+			
+		}
 	}
 	
-	private void connect(){
-		
-		List<MicroController> lstMc = new ArrayList<MicroController>(mcs.values());		
-		for (MicroController micro : lstMc) {
-			
-			SerialPort serialPort = micro.connect();
-			//System.out.println(micro.getIdConnection());
-			//micro.setSerialPort(serialPort);
-			//MicroControllerLister listener = new MicroControllerLister(micro);
-			//listener.start();
-			
-		}		
-	}
 	
 	public void sendData(String data,String mcName) throws SerialPortException{
 		
@@ -75,6 +58,13 @@ public class MicroControllerHandler {
 		boolean a=micro.getSerialPort().writeString(data);
 		
 		System.out.println("respuesta "+a);
+	}
+	
+	
+	private void initLister(MicroController mc){
+		
+		MicroControllerLister listener = new MicroControllerLister(mc);
+		listener.start();
 	}
 	
 }

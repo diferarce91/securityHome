@@ -1,6 +1,9 @@
 package diferarce.securityHome.domain;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jssc.SerialPort;
 import jssc.SerialPortException;
 
@@ -15,7 +18,7 @@ public class SerialConnection {
 		this.port=port;
 	}
 	
-	public SerialPort connect(){
+	public List<Object> connect(){
 		SerialPort serialPort = new SerialPort(this.port);
 		try{
 			serialPort.openPort();
@@ -50,7 +53,13 @@ public class SerialConnection {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return serialPort;	
+		
+		List<Object> data = new ArrayList<Object>();
+		data.add(serialPort);
+		data.add("1");
+		
+		
+		return data;	
 	}
 	
 }

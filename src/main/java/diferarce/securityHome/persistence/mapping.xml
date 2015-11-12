@@ -10,22 +10,20 @@
 	
 	
 	
-	<select id="ejemplo"  resultMap="tutorialResultWithAutor">
-		select a.id as task, a.name, b.deviceId, c.name as device, c.description
+	<select id="getTasks"  resultMap="taskResultWithDevices">
+		select a.id as task, a.name, b.deviceId, c.name,c.description
 		from task a  INNER JOIN scheduledTask b 	ON	 a.id = b.taskId  
-					 INNER JOIN device c  ON	b.deviceId = c.deviceId
-	</select>
-		
-	<resultMap  type="diferarce.securityHome.dao.A" id="tutorialResultWithAutor">
+                     INNER JOIN device c ON b.deviceId = c.id					
+	</select>		
+	<resultMap  type="diferarce.securityHome.dao.ScheduledTask" id="taskResultWithDevices">
 		<id column="task" property="id" javaType="int"/>
 	    <result column="name" property="name" javaType="string"/>	    
-	    <collection property="devices" javaType="ArrayList" ofType="diferarce.securityHome.dao.B" column="deviceId" resultMap="resultTag" />	    
+	    <collection property="devices" javaType="ArrayList" ofType="diferarce.securityHome.dao.Device" column="deviceId" resultMap="resultTag" />	    
 	    
-	</resultMap>
-	
-	<resultMap id="resultTag" type="diferarce.securityHome.dao.B">
-		<id property="id" column="deviceId" />
-		<result column="device" property="name" javaType="string"/>
+	</resultMap>	
+	<resultMap id="resultTag" type="diferarce.securityHome.dao.Device">
+		<id property="id" column="deviceId" javaType="int"/>
+		<result column="name" property="name" javaType="string"/>
 		<result column="description" property="description" javaType="string"/>
 	</resultMap>
 
