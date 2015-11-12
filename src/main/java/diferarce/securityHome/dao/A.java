@@ -4,6 +4,8 @@ import java.util.List;
 
 public class A {
 	
+	/*Clase de prueba*/
+	
 	private int id;
 	private String name;
 	private List<B> deviceId;
