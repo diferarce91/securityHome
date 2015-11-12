@@ -2,9 +2,9 @@ package diferarce.securityHome.dao;
 
 public class B {
 	
-	private Integer deviceId;
-	private int days;
-	
+	private Integer id;
+	private String name;
+	private String description;
 	
 	
 
@@ -12,25 +12,50 @@ public class B {
 		
 	}
 
-	public B(Integer deviceId) {
+	public B(Integer id) {
 		super();
-		this.deviceId = deviceId;
+		this.id = id;
+	}
+	
+	
+
+	public B(Integer id, String name) {
+		super();
+		this.id = id;
+		this.name = name;
+	}
+	
+	
+
+	public B(Integer id, String name, String description) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.description = description;
 	}
 
-	public Integer getDeviceId() {
-		return deviceId;
+	public Integer getid() {
+		return id;
 	}
 
-	public void setDeviceId(Integer deviceId) {
-		this.deviceId = deviceId;
+	public void setid(Integer id) {
+		this.id = id;
 	}
 
-	public int getDays() {
-		return days;
+	public String getname() {
+		return name;
 	}
 
-	public void setDays(int days) {
-		this.days = days;
+	public void setname(String name) {
+		this.name = name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	
 	

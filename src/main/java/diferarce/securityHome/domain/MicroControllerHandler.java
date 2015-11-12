@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 import diferarce.securityHome.dao.A;
+import diferarce.securityHome.dao.B;
 import diferarce.securityHome.dao.MicroController;
 
 
@@ -39,10 +40,11 @@ public class MicroControllerHandler {
 		List<A> lista= null;
 		lista= this.sqlSession.selectList("ejemplo");
 		System.out.println(lista.size()+" :  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><");
-		for (A a : lista) {
-			
-			System.out.println("  Array devicessss  :  "+a.getDeviceId().size());
-			
+		for (A a : lista) {			
+			//System.out.println("  Array devicessss  :  "+a.getdevices().size());
+			for (B b : a.getdevices()) {
+				System.out.println(" NOMBRE :"+b.getname()+"   |  "+b.getDescription());
+			}
 		}	
 		
 		//list = this.sqlSession.selectList("getMicroControllers");
