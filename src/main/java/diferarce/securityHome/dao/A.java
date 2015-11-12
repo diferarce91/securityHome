@@ -4,7 +4,7 @@ import java.util.List;
 
 public class A {
 	
-	/*Clase de prueba*/
+	/*Clase de prueba ejemplo*/
 	
 	private int id;
 	private String name;
