@@ -42,7 +42,7 @@ public class MicroControllerHandler {
 		System.out.println(lista.size()+" :  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><");
 		for (A a : lista) {			
 			//System.out.println("  Array devicessss  :  "+a.getdevices().size());
-			for (B b : a.getdevices()) {
+			for (B b : a.getDeviceId()) {
 				System.out.println(" NOMBRE :"+b.getname()+"   |  "+b.getDescription());
 			}
 		}	
