@@ -8,20 +8,27 @@
 		SELECT name,port FROM microControllers
 	</select>
 	
+	
+	
+	<select id="ejemplo"  resultMap="tutorialResultWithAutor">
+		select a.id as task, a.name, b.deviceId, c.name as device, c.description
+		from task a  INNER JOIN scheduledTask b 	ON	 a.id = b.taskId  
+					 INNER JOIN device c  ON	b.deviceId = c.deviceId
+	</select>
 		
 	<resultMap  type="diferarce.securityHome.dao.A" id="tutorialResultWithAutor">
 		<id column="task" property="id" javaType="int"/>
 	    <result column="name" property="name" javaType="string"/>	    
-	    <collection property="deviceId" javaType="ArrayList" ofType="diferarce.securityHome.dao.B" column="deviceId" />
-	    
+	    <collection property="devices" javaType="ArrayList" ofType="diferarce.securityHome.dao.B" column="deviceId" resultMap="resultTag" />	    
 	    
 	</resultMap>
 	
+	<resultMap id="resultTag" type="diferarce.securityHome.dao.B">
+		<id property="id" column="deviceId" />
+		<result column="device" property="name" javaType="string"/>
+		<result column="description" property="description" javaType="string"/>
+	</resultMap>
 
-	<select id="ejemplo"  resultMap="tutorialResultWithAutor">
-		select a.id as task, a.name, b.deviceId
-		from task a  INNER JOIN scheduledTask b 	ON	 a.id = b.taskId  
-		
-	</select>
+	
 		
 </mapper>
