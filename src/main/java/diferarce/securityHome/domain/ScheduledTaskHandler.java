@@ -1,9 +1,11 @@
 package diferarce.securityHome.domain;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import diferarce.securityHome.dao.Device;
@@ -20,26 +22,25 @@ public class ScheduledTaskHandler {
 	public ScheduledTaskHandler(SqlSession sqlSession) {
 		
 		this.sqlSession = sqlSession;
-		this.getTasks();
-		
-	}
-	
-	private void getTasks(){
-		
-		List<ScheduledTask> lista= null;
-		lista= this.sqlSession.selectList("getTasks");
-		System.out.println(lista.size()+" :  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><");
-		for (ScheduledTask a : lista) {			
-			//System.out.println("  Array devicessss  :  "+a.getdevices().size());
-			for (Device b : a.getdevices()) {
-				System.out.println(" NOMBRE :"+b.getName()+"   |  "+b.getDescription());
-			}
-		}
+		this.tasks = this.sqlSession.selectList("getTasks");
 		
 	}
 	
 	
+	@Scheduled(fixedRateString = "60000")
+	public void clearPullSessions() {		
+		
+						
+		
+		
+	}
 	
+	
+	public void execTask(){
+		
+		
+		
+	}
 	
 	
 }

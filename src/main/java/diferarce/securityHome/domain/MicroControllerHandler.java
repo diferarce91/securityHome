@@ -29,7 +29,7 @@ public class MicroControllerHandler {
 	@Autowired
 	public MicroControllerHandler(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
-		this.connectMc();
+		//this.connectMc();
 	}
 
 
