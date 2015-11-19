@@ -18,6 +18,9 @@ public class ScheduledTaskHandler {
 	private List<ScheduledTask> tasks;
 	private SqlSession sqlSession;
 	
+	@Autowired 
+	ScheduledTaskThread thread;
+	
 	@Autowired
 	public ScheduledTaskHandler(SqlSession sqlSession) {
 		
@@ -30,8 +33,13 @@ public class ScheduledTaskHandler {
 	@Scheduled(fixedRateString = "60000")
 	public void clearPullSessions() {		
 		
-						
-		
+		for (ScheduledTask task : tasks) {
+			
+			thread.setTask(task);
+			thread.start();
+
+		}
+				
 		
 	}
 	
